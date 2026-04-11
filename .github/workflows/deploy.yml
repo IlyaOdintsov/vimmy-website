@@ -12,7 +12,6 @@ jobs:
   deploy-frontend:
     name: Deploy Frontend
     runs-on: ubuntu-latest
-    # Убираем условие для ручного запуска
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
