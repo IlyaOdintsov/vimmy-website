@@ -27,7 +27,7 @@ export const Header = ({ isMobileMenuOpen, onMenuToggle }: HeaderProps) => {
 						<Logo size={isLg ? 'md' : 'lg'} />
 
 						<Text variant="heading" className="font-medium tracking-wide">
-							vimmy.333
+							vimmy.
 						</Text>
 					</a>
 				</div>
