@@ -12,10 +12,10 @@ jobs:
   deploy-frontend:
     name: Deploy Frontend
     runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.modified, 'frontend/') || contains(github.event.head_commit.added, 'frontend/')
-
+    # Убираем условие для ручного запуска
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -58,14 +58,14 @@ jobs:
             rm -rf /tmp/frontend-deploy
             
             echo "Frontend deployed to /var/www/vimmy_website/frontend/dist"
+
   deploy-backend:
     name: Deploy Backend
     runs-on: ubuntu-latest
     needs: deploy-frontend
-    if: always() && (github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.modified, 'backend/') || contains(github.event.head_commit.added, 'backend/'))
-
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Setup Node.js for Backend
         uses: actions/setup-node@v4
@@ -132,7 +132,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: [deploy-frontend, deploy-backend]
     if: always()
-
     steps:
       - name: Reload Nginx
         uses: appleboy/ssh-action@v1
