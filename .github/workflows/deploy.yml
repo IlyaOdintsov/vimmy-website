@@ -7,11 +7,13 @@ on:
       - 'frontend/**'
       - 'backend/**'
   workflow_dispatch:
+    inputs: {}
 
 jobs:
   deploy-frontend:
     name: Deploy Frontend
     runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || success()
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
