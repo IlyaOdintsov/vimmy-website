@@ -69,21 +69,37 @@ jobs:
     runs-on: ubuntu-latest
     needs: deploy-frontend
     steps:
+      - name: Check if backend exists
+        id: check_backend
+        run: |
+          if [ ! -d "backend" ] || [ -z "$(ls -A backend 2>/dev/null)" ]; then
+            echo "exists=false" >> $GITHUB_OUTPUT
+            echo "Backend folder not found or empty - skipping deployment"
+            exit 0
+          else
+            echo "exists=true" >> $GITHUB_OUTPUT
+            echo "Backend folder found"
+          fi
+
       - name: Checkout code
         uses: actions/checkout@v4
+        if: steps.check_backend.outputs.exists == 'true'
 
       - name: Setup Node.js for Backend
         uses: actions/setup-node@v4
+        if: steps.check_backend.outputs.exists == 'true'
         with:
           node-version: 20
 
       - name: Install Backend Dependencies
+        if: steps.check_backend.outputs.exists == 'true'
         run: |
           cd backend
           npm install
           echo "Backend dependencies installed"
 
       - name: Build Backend (if needed)
+        if: steps.check_backend.outputs.exists == 'true'
         run: |
           cd backend
           if [ -f "package.json" ] && grep -q '"build"' package.json; then
@@ -94,6 +110,7 @@ jobs:
           fi
 
       - name: Deploy Backend to VPS
+        if: steps.check_backend.outputs.exists == 'true'
         uses: appleboy/scp-action@v1
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -104,12 +121,18 @@ jobs:
           strip_components: 1
 
       - name: Apply Backend Deployment
+        if: steps.check_backend.outputs.exists == 'true'
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
+            if [ ! -d "/tmp/backend-deploy" ] || [ -z "$(ls -A /tmp/backend-deploy 2>/dev/null)" ]; then
+              echo "No files to deploy! Skipping."
+              exit 1
+            fi
+            
             sudo mkdir -p /var/www/backend
             
             pm2 stop vimmy_backend 2>/dev/null || true
