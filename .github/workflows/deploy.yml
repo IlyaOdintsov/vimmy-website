@@ -10,13 +10,56 @@ on:
     inputs: {}
 
 jobs:
-  deploy-frontend:
-    name: Deploy Frontend
+  check-changes:
+    name: Check What Changed
     runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch' || success()
+    outputs:
+      frontend_changed: ${{ steps.check.outputs.frontend_changed }}
+      backend_changed: ${{ steps.check.outputs.backend_changed }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      
+      - name: Check for changes
+        id: check
+        run: |
+          echo "frontend_changed=false" >> $GITHUB_OUTPUT
+          echo "backend_changed=false" >> $GITHUB_OUTPUT
+          
+          if [ -d "frontend" ] && [ -n "$(ls -A frontend 2>/dev/null)" ]; then
+            echo "frontend_changed=true" >> $GITHUB_OUTPUT
+            echo "✅ Frontend folder exists and not empty"
+          else
+            echo "⚠️ Frontend folder is missing or empty"
+          fi
+          
+          if [ -d "backend" ] && [ -n "$(ls -A backend 2>/dev/null)" ]; then
+            echo "backend_changed=true" >> $GITHUB_OUTPUT
+            echo "✅ Backend folder exists and not empty"
+          else
+            echo "⚠️ Backend folder is missing or empty"
+          fi
+
+  deploy-frontend:
+    name: Deploy Frontend
+    runs-on: ubuntu-latest
+    needs: check-changes
+    if: |
+      github.event_name == 'workflow_dispatch' || 
+      (needs.check-changes.outputs.frontend_changed == 'true')
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Verify frontend folder
+        run: |
+          if [ ! -d "frontend" ] || [ -z "$(ls -A frontend 2>/dev/null)" ]; then
+            echo "❌ Frontend folder is missing or empty! Skipping deploy."
+            exit 1
+          fi
+          echo "✅ Frontend folder verified"
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -26,9 +69,18 @@ jobs:
       - name: Install & Build Frontend
         run: |
           cd frontend
+          if [ ! -f "package.json" ]; then
+            echo "❌ package.json not found in frontend!"
+            exit 1
+          fi
           npm install
           npm run build
           echo "Frontend build completed"
+          
+          if [ ! -d "dist" ] || [ -z "$(ls -A dist 2>/dev/null)" ]; then
+            echo "❌ Build failed - dist folder is empty!"
+            exit 1
+          fi
           ls -la dist/
 
       - name: Deploy Frontend to VPS
@@ -48,6 +100,11 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
+            if [ ! -d "/tmp/frontend-deploy" ] || [ -z "$(ls -A /tmp/frontend-deploy 2>/dev/null)" ]; then
+              echo "❌ No files to deploy! Skipping."
+              exit 1
+            fi
+            
             sudo rm -rf /var/www/vimmy_website/frontend/dist/*
             sudo mkdir -p /var/www/vimmy_website/frontend/dist
             sudo cp -r /tmp/frontend-deploy/* /var/www/vimmy_website/frontend/dist/
@@ -58,15 +115,26 @@ jobs:
             
             rm -rf /tmp/frontend-deploy
             
-            echo "Frontend deployed to /var/www/vimmy_website/frontend/dist"
+            echo "✅ Frontend deployed to /var/www/vimmy_website/frontend/dist"
 
   deploy-backend:
     name: Deploy Backend
     runs-on: ubuntu-latest
-    needs: deploy-frontend
+    needs: [check-changes, deploy-frontend]
+    if: |
+      github.event_name == 'workflow_dispatch' || 
+      (needs.check-changes.outputs.backend_changed == 'true')
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Verify backend folder
+        run: |
+          if [ ! -d "backend" ] || [ -z "$(ls -A backend 2>/dev/null)" ]; then
+            echo "❌ Backend folder is missing or empty! Skipping deploy."
+            exit 1
+          fi
+          echo "✅ Backend folder verified"
 
       - name: Setup Node.js for Backend
         uses: actions/setup-node@v4
@@ -76,17 +144,21 @@ jobs:
       - name: Install Backend Dependencies
         run: |
           cd backend
+          if [ ! -f "package.json" ]; then
+            echo "❌ package.json not found in backend!"
+            exit 1
+          fi
           npm install
-          echo "Backend dependencies installed"
+          echo "✅ Backend dependencies installed"
 
       - name: Build Backend (if needed)
         run: |
           cd backend
           if [ -f "package.json" ] && grep -q '"build"' package.json; then
             npm run build
-            echo "Backend built"
+            echo "✅ Backend built"
           else
-            echo "No build step needed"
+            echo "ℹ️ No build step needed"
           fi
 
       - name: Deploy Backend to VPS
@@ -106,6 +178,11 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
+            if [ ! -d "/tmp/backend-deploy" ] || [ -z "$(ls -A /tmp/backend-deploy 2>/dev/null)" ]; then
+              echo "❌ No files to deploy! Skipping."
+              exit 1
+            fi
+            
             sudo mkdir -p /var/www/backend
             
             pm2 stop vimmy_backend 2>/dev/null || true
@@ -122,17 +199,19 @@ jobs:
             
             pm2 start npm --name "vimmy_backend" -- start
             pm2 save
-            pm2 startup
+            pm2 startup || true
             
             rm -rf /tmp/backend-deploy
             
-            echo "Backend deployed and started"
+            echo "✅ Backend deployed and started"
 
   reload-nginx:
     name: Reload Nginx
     runs-on: ubuntu-latest
     needs: [deploy-frontend, deploy-backend]
-    if: always()
+    if: |
+      always() && 
+      (needs.deploy-frontend.result == 'success' || needs.deploy-backend.result == 'success')
     steps:
       - name: Reload Nginx
         uses: appleboy/ssh-action@v1
@@ -142,5 +221,5 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             sudo nginx -t && sudo systemctl reload nginx
-            echo "Nginx reloaded"
-            echo "Full deployment completed!"
+            echo "✅ Nginx reloaded"
+            echo "🎉 Full deployment completed!"
