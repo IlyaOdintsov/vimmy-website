@@ -1,6 +1,7 @@
 import AppRouter from './providers/AppRouter';
 import { Toaster } from 'sonner';
 import emailjs from '@emailjs/browser';
+import {useEffect} from "react";
 
 const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
