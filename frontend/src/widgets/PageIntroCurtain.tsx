@@ -27,7 +27,7 @@ export const PageIntroCurtain = ({ duration = 1.6, onComplete }: PageIntroCurtai
 		<AnimatePresence>
 			{isVisible && (
 				<>
-					<div className="fixed inset-0 z-40 flex justify-center items-center" style={{ backgroundColor: '#5B44F2' }}>
+					<div className="fixed inset-0 z-40 flex justify-center items-center bg-card">
 						<motion.div
 							initial={{ opacity: 0, scale: 0.8 }}
 							animate={{
@@ -51,8 +51,7 @@ export const PageIntroCurtain = ({ duration = 1.6, onComplete }: PageIntroCurtai
 					</div>
 
 					<motion.div
-						className="fixed top-0 left-0 w-1/2 h-full z-50 overflow-hidden"
-						style={{ backgroundColor: '#3A29A6' }}
+						className="fixed top-0 left-0 w-1/2 h-full z-50 overflow-hidden bg-background"
 						initial={{ x: '-100%' }}
 						animate={{ x: 0 }}
 						transition={{
@@ -60,14 +59,13 @@ export const PageIntroCurtain = ({ duration = 1.6, onComplete }: PageIntroCurtai
 							ease: [0.65, 0, 0.35, 1],
 						}}
 					>
-						<span className="text-[20vw] font-bold text-primary absolute bottom-1/2 transform: translate-y-1/2 right-0 translate-x-1/2 leading-none">
+						<span className="text-[12vw] font-bold text-foreground absolute bottom-1/2 transform: translate-y-1/2 right-0 translate-x-1/2 leading-none">
 							VIMMY
 						</span>
 					</motion.div>
 
 					<motion.div
-						className="fixed top-0 right-0 w-1/2 h-full z-50 overflow-hidden"
-						style={{ backgroundColor: '#3A29A6' }}
+						className="fixed top-0 right-0 w-1/2 h-full z-50 overflow-hidden bg-background"
 						initial={{ x: '100%' }}
 						animate={{ x: 0 }}
 						transition={{
@@ -76,7 +74,7 @@ export const PageIntroCurtain = ({ duration = 1.6, onComplete }: PageIntroCurtai
 						}}
 						onAnimationComplete={handleAnimationComplete}
 					>
-						<span className="text-[20vw] font-bold text-primary absolute bottom-1/2 transform: translate-y-1/2 left-0 -translate-x-1/2 leading-none">
+						<span className="text-[12vw] font-bold text-foreground absolute bottom-1/2 transform: translate-y-1/2 left-0 -translate-x-1/2 leading-none">
 							VIMMY
 						</span>
 					</motion.div>

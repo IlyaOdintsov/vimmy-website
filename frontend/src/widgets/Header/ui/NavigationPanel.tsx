@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils.ts';
 const navigateList = [
 	{ name: 'About', href: '#about' },
 	{ name: 'Skills', href: '#skills' },
-	{ name: 'Projects', href: '#projects' },
+	// { name: 'Projects', href: '#projects' },
 	{ name: 'Contact', href: '#contact' },
 ];
 
@@ -13,6 +13,18 @@ interface NavigationPanelProps {
 }
 
 export const NavigationPanel = ({ onNavigate, className }: NavigationPanelProps) => {
+
+	const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+		e.preventDefault();
+
+		const element = document.querySelector(href);
+		if (element) {
+			element.scrollIntoView({ behavior: 'smooth' });
+		}
+
+		onNavigate?.();
+	};
+
 	return (
 		<nav className={cn('w-full flex', 'flex-row justify-evenly gap-6', className)}>
 			{navigateList.map((item) => (
@@ -20,7 +32,7 @@ export const NavigationPanel = ({ onNavigate, className }: NavigationPanelProps)
 					key={item.name}
 					href={item.href}
 					className="relative inline-block  text-muted-foreground hover:text-foreground transition-colors duration-300 group overflow-hidden"
-					onClick={onNavigate}
+					onClick={(e) => handleClick(e, item.href)}
 				>
 					{item.name}
 

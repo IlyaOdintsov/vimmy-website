@@ -16,7 +16,7 @@ export const AnimatedLangToggle = ({ animate }: AnimatedLangToggleProps) => {
 
 	return (
 		<AnimatePresence>
-			<SlideIn direction="right" animate={animate} delay={firstLoad ? 0.4 : 0} className="absolute top-0 right-8" onAnimateComplete={() => setFirstLoad(false)}>
+			<SlideIn direction="bottom" animate={animate} delay={firstLoad ? 4.1 : 0} className="absolute top-0 right-8" onAnimateComplete={() => setFirstLoad(false)}>
 				<LangToggle />
 			</SlideIn>
 		</AnimatePresence>

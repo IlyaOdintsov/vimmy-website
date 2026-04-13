@@ -3,7 +3,7 @@ import { useThemeStore } from '@/shared/lib/stores';
 import { cn } from '@/lib/utils.ts';
 import { AnimatePresence, motion } from 'framer-motion';
 
-export function ThemeToggle({ classname }: { classname?: string }) {
+export function ThemeToggle({ darkText, lightText, classname }: { darkText?: string, lightText?:string, classname?: string }) {
 	const { theme, resolvedTheme, setTheme, setResolvedTheme } = useThemeStore();
 
 	useEffect(() => {
@@ -54,8 +54,8 @@ export function ThemeToggle({ classname }: { classname?: string }) {
 					transition={{ duration: 0.2 }}
 					className="inline-block whitespace-nowrap border-b-[1px] border-primary"
 				>
-					<span className="dark:hidden">.dark mode</span>
-					<span className="hidden dark:inline">.light mode</span>
+					<span className="dark:hidden">{darkText ? darkText : '.dark mode'}</span>
+					<span className="hidden dark:inline">{lightText ? lightText : '.light mode'}</span>
 				</motion.span>
 			</AnimatePresence>
 		</div>

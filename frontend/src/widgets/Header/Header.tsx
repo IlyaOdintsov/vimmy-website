@@ -4,8 +4,7 @@ import { useIsLg } from '@/shared/lib/hooks/useIsMobile.tsx';
 import { ThemeToggle } from '@/features/theme/theme-toggle.tsx';
 import { Text } from '@/shared/ui/typography/Text.tsx';
 import React from 'react';
-import { PanelTopOpen } from 'lucide-react';
-import { motion } from 'framer-motion';
+import {MobileMenuButton} from "@/widgets/Header/ui/MobileMenu.tsx";
 
 interface HeaderProps {
 	isMobileMenuOpen: boolean;
@@ -33,10 +32,9 @@ export const Header = ({ isMobileMenuOpen, onMenuToggle }: HeaderProps) => {
 				</div>
 
 				{isLg ? (
-					<button onClick={handleMenuToggle} className="p-2 rounded-md hover:bg-muted transition-colors" aria-label="Open menu">
-						<motion.div animate={{ rotate: isMobileMenuOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
-							<PanelTopOpen size={24} />
-						</motion.div>
+					<button onClick={handleMenuToggle} className="p-2 rounded-md hover:bg-muted transition-colors flex gap-6" aria-label="Open menu">
+						<ThemeToggle lightText='.light' darkText='.dark' />
+						<MobileMenuButton isMobileMenuOpen={isMobileMenuOpen} />
 					</button>
 				) : (
 					<div className="flex w-full items-center justify-between gap-6">

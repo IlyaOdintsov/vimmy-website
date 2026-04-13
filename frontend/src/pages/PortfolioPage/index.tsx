@@ -5,7 +5,6 @@ import ContactSection from '@/pages/PortfolioPage/sections/ContactSection.tsx';
 import MainSection from '@/pages/PortfolioPage/sections/MainSection.tsx';
 import { Footer } from '@/widgets/Footer.tsx';
 import SkillsSection from '@/pages/PortfolioPage/sections/SkillsSection.tsx';
-import ProjectsSection from '@/pages/PortfolioPage/sections/ProjectsSection.tsx';
 
 export const Portfolio = () => {
 	const { showCurtain, curtainComplete } = useAnimationStore();
