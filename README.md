@@ -1,6 +1,6 @@
 # Portfolio Website — Frontend Developer
 
-(vimmy.ru)[https://vimmy.ru]
+[vimmy.ru](https://vimmy.ru)
 
 Персональный сайт‑портфолио для демонстрации проектов и навыков во frontend‑разработке.
 
