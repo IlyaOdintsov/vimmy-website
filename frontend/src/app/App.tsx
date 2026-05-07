@@ -1,6 +1,8 @@
 import AppRouter from './providers/AppRouter';
 import { Toaster } from 'sonner';
 import emailjs from '@emailjs/browser';
+import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
@@ -13,6 +15,10 @@ emailjs.init({
 });
 
 function App() {
+	const location = useLocation();
+	useEffect(() => {
+		window.ym(109109373, 'hit', window.location.href);
+	}, [location.pathname]);
 	return (
 		<>
 			<AppRouter />
