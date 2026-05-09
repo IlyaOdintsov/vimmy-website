@@ -1,6 +1,6 @@
 import { useAnimationStore } from '@/shared/lib/stores';
 import { AnimatePresence } from 'framer-motion';
-import { SlideIn } from '@/shared/ui/animations/SlideIn.tsx';
+import { SlideIn } from '@/shared/lib/utils/SlideIn.tsx';
 import { LangToggle } from '@/features/Language/LanguageToggle.tsx';
 import { useState } from 'react';
 

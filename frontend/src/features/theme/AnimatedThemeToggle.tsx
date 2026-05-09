@@ -1,6 +1,6 @@
 import { AnimatePresence } from 'framer-motion';
 import { useAnimationStore } from '@/shared/lib/stores';
-import { SlideIn } from '@/shared/ui/animations/SlideIn.tsx';
+import { SlideIn } from '@/shared/lib/utils/SlideIn.tsx';
 import { ThemeToggle } from '@/features/theme/theme-toggle.tsx';
 
 export const AnimatedThemeToggle = () => {

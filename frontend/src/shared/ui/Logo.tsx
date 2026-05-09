@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { cn } from '@/lib/utils.ts';
 
 interface LogoProps {
 	size?: 'sm' | 'md' | 'lg' | 'xl' | number;

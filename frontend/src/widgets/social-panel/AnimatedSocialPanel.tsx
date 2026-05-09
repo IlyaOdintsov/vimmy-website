@@ -1,8 +1,8 @@
 import { AnimatePresence } from 'framer-motion';
 import { SocialPanel } from './SocialPanel';
-import { useIsLg, useIsXl } from '@/shared/lib/hooks/useIsMobile.tsx';
+import { useIsXl } from '@/shared/lib/hooks/useIsMobile.tsx';
 import { useAnimationStore } from '@/shared/lib/stores';
-import { SlideIn } from '@/shared/ui/animations/SlideIn.tsx';
+import { SlideIn } from '@/shared/lib/utils/SlideIn.tsx';
 
 export const AnimatedSocialPanel = () => {
 	const isXl = useIsXl();

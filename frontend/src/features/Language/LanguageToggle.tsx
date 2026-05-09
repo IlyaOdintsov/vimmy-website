@@ -22,11 +22,11 @@ export const LangToggle = () => {
 					</Button>
 				</HoverCardTrigger>
 				<HoverCardContent side={'left'} className={`bg-background p-0 w-full flex items-center overflow-hidden z-20 h-10`}>
-					<ToggleGroup type="single" value={currentLang} onValueChange={handleLangChange} className="h-10">
-						<ToggleGroupItem value="en" aria-label="English" className="h-10">
+					<ToggleGroup type="single" value={currentLang} onValueChange={handleLangChange} className="h-10 select-none">
+						<ToggleGroupItem value="en" aria-label="English" className="h-10 cursor-pointer data-[state=on]:cursor-default">
 							EN
 						</ToggleGroupItem>
-						<ToggleGroupItem value="ru" aria-label="Русский" className="h-10">
+						<ToggleGroupItem value="ru" aria-label="Русский" className="h-10 cursor-pointer data-[state=on]:cursor-default">
 							RU
 						</ToggleGroupItem>
 					</ToggleGroup>

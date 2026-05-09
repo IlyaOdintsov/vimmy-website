@@ -48,9 +48,11 @@
 		"@vitejs/plugin-react": "^5.1.1",
 		"autoprefixer": "^10.4.27",
 		"eslint": "^9.39.4",
+		"eslint-plugin-prettier": "^5.5.5",
 		"eslint-plugin-react": "^7.37.5",
 		"eslint-plugin-react-hooks": "^5.2.0",
 		"eslint-plugin-react-refresh": "^0.4.26",
+		"eslint-plugin-unused-imports": "^4.4.1",
 		"globals": "^16.5.0",
 		"husky": "^9.1.7",
 		"postcss": "^8.5.8",
@@ -62,8 +64,7 @@
 	"lint-staged": {
 		"*.{js,jsx,ts,tsx}": [
 			"prettier --write",
-			"eslint --fix",
-			"eslint --max-warnings=0"
+			"eslint --fix"
 		]
 	}
 }

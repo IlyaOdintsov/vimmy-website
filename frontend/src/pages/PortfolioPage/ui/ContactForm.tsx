@@ -178,7 +178,7 @@ export const ContactForm = () => {
 						{errors.form && <p className="text-sm text-destructive">{errors.form}</p>}
 
 						{isLocked ? (
-							`Форма закрыта. Подождите ${timeLeft} сек.`
+							`Form is closed. Wait ${timeLeft} sec.`
 						) : (
 							<Button className="w-full gap-2" type="submit" disabled={isSubmitting}>
 								<Send className="h-4 w-4" />

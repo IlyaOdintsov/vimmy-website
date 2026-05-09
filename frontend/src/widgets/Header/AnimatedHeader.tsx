@@ -12,23 +12,22 @@ export const AnimatedHeader = () => {
 	const menuRef = useClickOutside<HTMLDivElement>(isMobileMenuOpen, () => setIsMobileMenuOpen((prev) => !prev));
 
 	return (
-		<div ref={menuRef}>
-			<motion.div
-				initial={{ y: -100, opacity: 0 }}
-				animate={{
-					y: showHeader ? 0 : -100,
-					opacity: showHeader ? 1 : 0,
-				}}
-				transition={{
-					duration: 0.6,
-					ease: 'easeOut',
-					type: 'tween',
-				}}
-				className={`fixed top-0 left-0 right-0 z-40 border-b border-border`}
-			>
-				<Header isMobileMenuOpen={isMobileMenuOpen} onMenuToggle={setIsMobileMenuOpen} />
-				<MobileMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
-			</motion.div>
-		</div>
+		<motion.div
+			initial={{ y: -100, opacity: 0 }}
+			animate={{
+				y: showHeader ? 0 : -100,
+				opacity: showHeader ? 1 : 0,
+			}}
+			transition={{
+				duration: 0.6,
+				ease: 'easeOut',
+				type: 'tween',
+			}}
+			ref={menuRef}
+			className={`fixed top-0 left-0 right-0 z-40 border-b border-border`}
+		>
+			<Header isMobileMenuOpen={isMobileMenuOpen} onMenuToggle={setIsMobileMenuOpen} />
+			<MobileMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
+		</motion.div>
 	);
 };

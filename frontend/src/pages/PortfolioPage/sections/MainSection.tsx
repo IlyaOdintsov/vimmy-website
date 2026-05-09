@@ -10,7 +10,7 @@ const MainSection = () => {
 
 	return (
 		<main id="about" ref={mainRef}>
-			<div className="relative mx-auto max-w-7xl min-h-screen w-full flex flex-col xl:flex-row gap-6 justify-center items-center">
+			<div className="relative mx-auto max-w-7xl min-h-screen py-[105px] w-full flex flex-col xl:flex-row gap-6 justify-center items-center">
 				<MainText isMainVisible={isMainVisible} />
 
 				<AnimatedSocialPanel />
