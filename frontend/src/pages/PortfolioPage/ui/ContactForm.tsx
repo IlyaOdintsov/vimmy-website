@@ -180,7 +180,7 @@ export const ContactForm = () => {
 						{isLocked ? (
 							`Form is closed. Wait ${timeLeft} sec.`
 						) : (
-							<Button className="w-full gap-2" type="submit" disabled={isSubmitting}>
+							<Button className="w-full gap-2 cursor-pointer" type="submit" disabled={isSubmitting}>
 								<Send className="h-4 w-4" />
 								{isSubmitting ? 'Sending...' : 'Send Message'}
 							</Button>
