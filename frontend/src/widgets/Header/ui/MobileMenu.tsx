@@ -8,9 +8,14 @@ interface MobileMenuProps {
 	onClose: () => void;
 }
 
-export const MobileMenuButton = ({isMobileMenuOpen}: {isMobileMenuOpen: boolean}) => {
+interface MobileMenuButtonProps {
+	isMobileMenuOpen: boolean;
+	onClick: () => void;
+}
+
+export const MobileMenuButton = ({isMobileMenuOpen, onClick}: MobileMenuButtonProps) => {
 	return (
-		<motion.div animate={{ rotate: isMobileMenuOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
+		<motion.div animate={{ rotate: isMobileMenuOpen ? 180 : 0 }} transition={{ duration: 0.2 }} onClick={onClick}>
 			<PanelTopOpen size={24} />
 		</motion.div>
 	)

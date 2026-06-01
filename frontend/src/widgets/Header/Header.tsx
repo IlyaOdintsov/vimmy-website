@@ -32,10 +32,10 @@ export const Header = ({ isMobileMenuOpen, onMenuToggle }: HeaderProps) => {
 				</div>
 
 				{isLg ? (
-					<button onClick={handleMenuToggle} className="p-2 rounded-md hover:bg-muted transition-colors flex gap-6" aria-label="Open menu">
+					<div className="p-2 rounded-md hover:bg-muted transition-colors flex gap-6" aria-label="Open menu">
 						<ThemeToggle lightText='.light' darkText='.dark' />
-						<MobileMenuButton isMobileMenuOpen={isMobileMenuOpen} />
-					</button>
+						<MobileMenuButton isMobileMenuOpen={isMobileMenuOpen} onClick={handleMenuToggle} />
+					</div>
 				) : (
 					<div className="flex w-full items-center justify-between gap-6">
 						<NavigationPanel />

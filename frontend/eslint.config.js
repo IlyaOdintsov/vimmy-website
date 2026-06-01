@@ -7,7 +7,12 @@ import typescriptPlugin from '@typescript-eslint/eslint-plugin';
 import unusedImports from 'eslint-plugin-unused-imports';
 
 export default [
+	{
+		ignores: ['**/node_modules/**', '**/dist/**', '**/build/**', '**/.next/**', '**/out/**', '**/coverage/**', '**/.husky/**', '**/public/**', '**/.git/**'],
+	},
+
 	js.configs.recommended,
+
 	{
 		files: ['**/*.{js,jsx,ts,tsx}'],
 		plugins: {
@@ -27,17 +32,15 @@ export default [
 			},
 		},
 		rules: {
-			// Консоль - только error (прервет коммит)
 			'no-console': ['error', { allow: ['warn', 'error'] }],
-
-			// Неиспользуемые переменные - error
-			'@typescript-eslint/no-unused-vars': ['error', {
-				argsIgnorePattern: '^_',
-				varsIgnorePattern: '^_',
-				caughtErrorsIgnorePattern: '^_',
-			}],
-
-			// Удаление неиспользуемых импортов
+			'@typescript-eslint/no-unused-vars': [
+				'error',
+				{
+					argsIgnorePattern: '^_',
+					varsIgnorePattern: '^_',
+					caughtErrorsIgnorePattern: '^_',
+				},
+			],
 			'unused-imports/no-unused-imports': 'error',
 			'unused-imports/no-unused-vars': [
 				'error',
@@ -48,8 +51,6 @@ export default [
 					argsIgnorePattern: '^_',
 				},
 			],
-
-			// Предупреждения (не блокируют коммит)
 			'react-hooks/exhaustive-deps': ['warn'],
 			'@typescript-eslint/no-explicit-any': ['warn'],
 			'react/react-in-jsx-scope': 'off',

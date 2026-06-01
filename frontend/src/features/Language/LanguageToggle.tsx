@@ -1,9 +1,8 @@
 import { useTranslation } from 'react-i18next';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card.tsx';
 import { Button } from '@/components/ui/button.tsx';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group.tsx';
 import { Languages } from 'lucide-react';
-import { useIsMd } from '@/shared/lib/hooks/useIsMobile.tsx';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover.tsx';
 
 export const LangToggle = () => {
 	const { i18n } = useTranslation();
@@ -15,13 +14,13 @@ export const LangToggle = () => {
 
 	return (
 		<>
-			<HoverCard openDelay={100} closeDelay={100}>
-				<HoverCardTrigger asChild>
+			<Popover>
+				<PopoverTrigger asChild>
 					<Button variant="outline" className="h-10 w-10">
 						<Languages className="size-reset h-6" />
 					</Button>
-				</HoverCardTrigger>
-				<HoverCardContent side={'left'} className={`bg-background p-0 w-full flex items-center overflow-hidden z-20 h-10`}>
+				</PopoverTrigger>
+				<PopoverContent side="left" className="bg-background p-0 w-full flex items-center overflow-hidden z-20 h-10">
 					<ToggleGroup type="single" value={currentLang} onValueChange={handleLangChange} className="h-10 select-none">
 						<ToggleGroupItem value="en" aria-label="English" className="h-10 cursor-pointer data-[state=on]:cursor-default">
 							EN
@@ -30,8 +29,8 @@ export const LangToggle = () => {
 							RU
 						</ToggleGroupItem>
 					</ToggleGroup>
-				</HoverCardContent>
-			</HoverCard>
+				</PopoverContent>
+			</Popover>
 		</>
 	);
 };
