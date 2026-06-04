@@ -6,11 +6,7 @@ import { useEffect } from 'react';
 
 export const AnimatedSocialPanel = () => {
 	const isXl = useIsXl();
-
-	useEffect(() => {
-		console.log(isXl);
-	}, [isXl]);
-
+	
 	return (
 		<AnimatePresence mode="wait">
 			{isXl ? (
