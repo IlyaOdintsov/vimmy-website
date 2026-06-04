@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+
+Host: https://vimmy.ru
+
+Crawl-delay: 0

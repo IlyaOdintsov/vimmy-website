@@ -1,5 +1,5 @@
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
-import { Portfolio } from '@/pages/PortfolioPage';
+import Portfolio from '@/pages/PortfolioPage';
 
 const router = createBrowserRouter([
 	{

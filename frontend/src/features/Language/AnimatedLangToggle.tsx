@@ -1,4 +1,3 @@
-import { useAnimationStore } from '@/shared/lib/stores';
 import { AnimatePresence } from 'framer-motion';
 import { SlideIn } from '@/shared/lib/utils/SlideIn.tsx';
 import { LangToggle } from '@/features/Language/LanguageToggle.tsx';
@@ -9,10 +8,7 @@ interface AnimatedLangToggleProps {
 }
 
 export const AnimatedLangToggle = ({ animate }: AnimatedLangToggleProps) => {
-	const { showCurtain } = useAnimationStore();
 	const [firstLoad, setFirstLoad] = useState(true);
-
-	if (showCurtain) return null;
 
 	return (
 		<AnimatePresence>

@@ -3,11 +3,11 @@ import { NavigationPanel } from './ui/NavigationPanel.tsx';
 import { useIsLg } from '@/shared/lib/hooks/useIsMobile.tsx';
 import { ThemeToggle } from '@/features/theme/theme-toggle.tsx';
 import { Text } from '@/shared/ui/typography/Text.tsx';
-import React from 'react';
-import {MobileMenuButton} from "@/widgets/Header/ui/MobileMenu.tsx";
+import { MobileMenuButton } from '@/widgets/Header/ui/MobileMenu.tsx';
 
 interface HeaderProps {
 	isMobileMenuOpen: boolean;
+
 	onMenuToggle: (isOpen: boolean) => void;
 }
 
@@ -33,7 +33,7 @@ export const Header = ({ isMobileMenuOpen, onMenuToggle }: HeaderProps) => {
 
 				{isLg ? (
 					<div className="p-2 rounded-md hover:bg-muted transition-colors flex gap-6" aria-label="Open menu">
-						<ThemeToggle lightText='.light' darkText='.dark' />
+						<ThemeToggle lightText=".light" darkText=".dark" />
 						<MobileMenuButton isMobileMenuOpen={isMobileMenuOpen} onClick={handleMenuToggle} />
 					</div>
 				) : (

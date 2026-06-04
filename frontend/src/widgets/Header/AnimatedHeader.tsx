@@ -2,10 +2,10 @@ import { motion } from 'framer-motion';
 import { Header } from './Header';
 import { useAnimationStore } from '@/shared/lib/stores/animationsStore.ts';
 import { MobileMenu } from '@/widgets/Header/ui/MobileMenu.tsx';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useClickOutside } from '@/shared/lib/hooks/useClickOutside.tsx';
 
-export const AnimatedHeader = () => {
+const AnimatedHeader = () => {
 	const { showHeader } = useAnimationStore();
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -31,3 +31,5 @@ export const AnimatedHeader = () => {
 		</motion.div>
 	);
 };
+
+export default AnimatedHeader;

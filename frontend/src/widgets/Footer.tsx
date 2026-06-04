@@ -1,7 +1,7 @@
 import { Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button.tsx';
 
-export const Footer = () => {
+const Footer = () => {
 	const year = new Date().getFullYear();
 	const nickName = 'vimmy.';
 
@@ -29,3 +29,5 @@ export const Footer = () => {
 		</footer>
 	);
 };
+
+export default Footer;

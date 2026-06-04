@@ -1,14 +1,10 @@
 import { AnimatePresence } from 'framer-motion';
 import { SocialPanel } from './SocialPanel';
 import { useIsXl } from '@/shared/lib/hooks/useIsMobile.tsx';
-import { useAnimationStore } from '@/shared/lib/stores';
 import { SlideIn } from '@/shared/lib/utils/SlideIn.tsx';
 
 export const AnimatedSocialPanel = () => {
 	const isXl = useIsXl();
-	const { showCurtain } = useAnimationStore();
-
-	if (showCurtain) return null;
 
 	return (
 		<AnimatePresence mode="wait">

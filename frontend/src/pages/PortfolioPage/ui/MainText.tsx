@@ -1,10 +1,7 @@
 import { TextAnimation } from '@/features/text-animation/TextAnimation.tsx';
 import { HeroSubtitle } from '@/features/text-animation/HeroSubtitle.tsx';
 import { GlitchText } from '@/features/text-animation/GlitchText.tsx';
-import { useAnimationStore } from '@/shared/lib/stores';
 import { useTranslation } from 'react-i18next';
-import React, { useEffect, useRef } from 'react';
-import { useInView } from 'framer-motion';
 import { AnimatedLangToggle } from '@/features/Language/AnimatedLangToggle.tsx';
 
 export const MainText = ({ isMainVisible }: { isMainVisible: boolean }) => {
@@ -13,9 +10,6 @@ export const MainText = ({ isMainVisible }: { isMainVisible: boolean }) => {
 	const text = 'front-end.web(developer)';
 	const glitchText = t('about.name');
 	const subtitleText = t('about.description');
-	const { showCurtain } = useAnimationStore();
-
-	if (showCurtain) return;
 
 	return (
 		<section className="relative max-w-lg sm:max-w-2xl lg:max-w-3xl xl:max-w-4xl w-full min-h-52 md:min-h-[340px] lg:min-h-96 flex flex-col gap-2 sm:gap-4 items-start px-8 md:p-0">

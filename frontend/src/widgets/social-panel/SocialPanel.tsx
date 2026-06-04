@@ -17,7 +17,6 @@ export const SocialPanel = ({ className, iconSize = 20, direction = 'horizontal'
 						key={name}
 						onClick={() => copyToClipboard({ text: url })}
 						className="text-muted-foreground hover:text-foreground transition-colors duration-200 cursor-pointer"
-						aria-label={ariaLabel}
 					>
 						<Icon size={iconSize} />
 					</div>

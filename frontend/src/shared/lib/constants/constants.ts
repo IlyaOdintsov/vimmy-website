@@ -28,7 +28,7 @@ export const CONTACT_LINKS: ContactLink[] = [
 		name: 'Email',
 		icon: EmailIcon,
 		url: 'ilya.odintsovv@yandex.ru',
-		ariaLabel: 'Email me',
+		ariaLabel: 'Email contact',
 		isCopy: true,
 	},
 ];

@@ -17,13 +17,15 @@ export const ContactLinks = () => {
 				};
 
 				return (
-					<Card key={name} onClick={handleClick} aria-label={ariaLabel} className="p-0 cursor-pointer">
+					<Card key={name} onClick={handleClick} className="p-0 cursor-pointer">
 						<CardContent className="p-6">
 							<div className="flex items-center gap-4">
 								<Icon size={30} />
 								<div className="w-full">
-									<h4>{name}</h4>
-									<p className="text-muted-foreground">{displayUrl}</p>
+									<p>{name}</p>
+									<a aria-label={ariaLabel} className="text-muted-foreground">
+										{displayUrl}
+									</a>
 								</div>
 							</div>
 						</CardContent>

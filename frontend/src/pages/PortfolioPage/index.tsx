@@ -1,32 +1,44 @@
-import { PageIntroCurtain } from '@/widgets/PageIntroCurtain.tsx';
-import { useAnimationStore } from '@/shared/lib/stores/animationsStore.ts';
-import { AnimatedHeader } from '@/widgets/Header/AnimatedHeader.tsx';
-import ContactSection from '@/pages/PortfolioPage/sections/ContactSection.tsx';
-import MainSection from '@/pages/PortfolioPage/sections/MainSection.tsx';
-import { Footer } from '@/widgets/Footer.tsx';
-import SkillsSection from '@/pages/PortfolioPage/sections/SkillsSection.tsx';
-import ProjectsSection from "@/pages/PortfolioPage/sections/ProjectsSection.tsx";
+import { useAnimationStore } from '@/shared/lib/stores';
+import { lazy, Suspense } from 'react';
 
-export const Portfolio = () => {
+const AnimatedHeader = lazy(() => import('@/widgets/Header/AnimatedHeader.tsx'));
+const MainSection = lazy(() => import('@/pages/PortfolioPage/sections/MainSection.tsx'));
+const SkillsSection = lazy(() => import('@/pages/PortfolioPage/sections/SkillsSection.tsx'));
+const ProjectsSection = lazy(() => import('@/pages/PortfolioPage/sections/ProjectsSection.tsx'));
+const ContactSection = lazy(() => import('@/pages/PortfolioPage/sections/ContactSection.tsx'));
+const Footer = lazy(() => import('@/widgets/Footer.tsx'));
+const PageIntroCurtain = lazy(() => import('@/widgets/PageIntroCurtain.tsx'));
+
+const Portfolio = () => {
 	const { showCurtain, curtainComplete } = useAnimationStore();
+
+	const SkeletonLoader = () => {
+		return <div></div>;
+	};
 
 	return (
 		<>
 			{showCurtain && <PageIntroCurtain duration={1.6} onComplete={curtainComplete} />}
 
-			<AnimatedHeader />
+			{!showCurtain && (
+				<Suspense fallback={<SkeletonLoader />}>
+					<AnimatedHeader />
 
-			<div className="divide-y divide-border [&>*]:border-t-1 [&>*]:border-border/50 [&>*]:first:border-t-0">
-				<MainSection />
+					<div className="divide-y divide-border [&>*]:border-t-1 [&>*]:border-border/50 [&>*]:first:border-t-0">
+						<MainSection />
 
-				<SkillsSection />
+						<SkillsSection />
 
-				<ProjectsSection />
+						<ProjectsSection />
 
-				<ContactSection />
+						<ContactSection />
 
-				<Footer />
-			</div>
+						<Footer />
+					</div>
+				</Suspense>
+			)}
 		</>
 	);
 };
+
+export default Portfolio;

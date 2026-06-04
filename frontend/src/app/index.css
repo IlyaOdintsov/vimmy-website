@@ -76,24 +76,14 @@
         }
     }
 
-    body,
-    .card,
-    .section,
-    button,
-    input,
-    textarea {
-        transition:
-                background-color 0.35s ease,
-                border-color 0.35s ease,
-                color 0.35s ease;
+    body, .card, .section, button, input, textarea, a {
+        transition-property: background-color, border-color, color;
+        transition-duration: 0.35s, 0.35s, 0.35s;
+        transition-timing-function: ease, ease, ease;
     }
 
-    a,
-    button {
-        transition:
-                background-color 0.25s ease,
-                border-color 0.25s ease,
-                color 0.25s ease;
+    a, button {
+        transition-duration: 0.25s;
     }
 }
 
@@ -124,13 +114,4 @@
     --color-destructive: var(--destructive);
     /* Chart colors */
     --color-chart-1: var(--chart-1);
-
-    /* Радиусы */
-    --radius-sm: calc(var(--radius) * 0.6);
-    --radius-md: calc(var(--radius) * 0.8);
-    --radius-lg: var(--radius);
-    --radius-xl: calc(var(--radius) * 1.4);
-    --radius-2xl: calc(var(--radius) * 1.8);
-    --radius-3xl: calc(var(--radius) * 2.2);
-    --radius-4xl: calc(var(--radius) * 2.6);
 }

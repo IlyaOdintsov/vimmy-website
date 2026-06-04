@@ -8,7 +8,7 @@ interface PageIntroCurtainProps {
 	onComplete?: () => void;
 }
 
-export const PageIntroCurtain = ({ duration = 1.6, onComplete }: PageIntroCurtainProps) => {
+const PageIntroCurtain = ({ duration = 1.6, onComplete }: PageIntroCurtainProps) => {
 	const [isVisible, setIsVisible] = useState(true);
 	const { showHeaderAfterDelay } = useAnimationStore();
 
@@ -83,3 +83,5 @@ export const PageIntroCurtain = ({ duration = 1.6, onComplete }: PageIntroCurtai
 		</AnimatePresence>
 	);
 };
+
+export default PageIntroCurtain;

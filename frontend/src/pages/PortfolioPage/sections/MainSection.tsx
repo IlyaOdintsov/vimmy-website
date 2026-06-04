@@ -1,8 +1,7 @@
+import { useRef } from 'react';
+import { useInView } from 'framer-motion';
 import { MainText } from '@/pages/PortfolioPage/ui/MainText.tsx';
 import { AnimatedSocialPanel } from '@/widgets/social-panel/AnimatedSocialPanel.tsx';
-import React, { useRef } from 'react';
-import { useInView } from 'framer-motion';
-import { SocialPanel } from '@/widgets/social-panel/SocialPanel.tsx';
 
 const MainSection = () => {
 	const mainRef = useRef(null);

@@ -16,7 +16,7 @@ export const LangToggle = () => {
 		<>
 			<Popover>
 				<PopoverTrigger asChild>
-					<Button variant="outline" className="h-10 w-10">
+					<Button aria-label="Change language" variant="outline" className="h-10 w-10">
 						<Languages className="size-reset h-6" />
 					</Button>
 				</PopoverTrigger>

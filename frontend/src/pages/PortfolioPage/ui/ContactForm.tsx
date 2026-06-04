@@ -6,6 +6,7 @@ import { Textarea } from '@/components/ui/textarea.tsx';
 import { Send } from 'lucide-react';
 import { SubmittedForm } from '@/pages/PortfolioPage/ui/SubmittedForm.tsx';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card.tsx';
+import React from 'react';
 
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
@@ -42,7 +43,7 @@ export const ContactForm = () => {
 		}, 1000);
 
 		return () => clearInterval(interval);
-	}, [isLocked]);
+	}, [isLocked, timeLeft]);
 
 	const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		const { name, value } = e.target;
