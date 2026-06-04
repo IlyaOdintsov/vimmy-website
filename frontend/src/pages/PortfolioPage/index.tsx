@@ -6,7 +6,7 @@ const MainSection = lazy(() => import('@/pages/PortfolioPage/sections/MainSectio
 const SkillsSection = lazy(() => import('@/pages/PortfolioPage/sections/SkillsSection.tsx'));
 const ProjectsSection = lazy(() => import('@/pages/PortfolioPage/sections/ProjectsSection.tsx'));
 const ContactSection = lazy(() => import('@/pages/PortfolioPage/sections/ContactSection.tsx'));
-const Footer = lazy(() => import('@/widgets/Footer.tsx'));
+const Footer = lazy(() => import('@/widgets/Footer/Footer.tsx'));
 const PageIntroCurtain = lazy(() => import('@/widgets/PageIntroCurtain.tsx'));
 
 const Portfolio = () => {
