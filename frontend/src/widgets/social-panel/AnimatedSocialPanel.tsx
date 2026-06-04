@@ -2,18 +2,23 @@ import { AnimatePresence } from 'framer-motion';
 import { SocialPanel } from './SocialPanel';
 import { useIsXl } from '@/shared/lib/hooks/useIsMobile.tsx';
 import { SlideIn } from '@/shared/lib/utils/SlideIn.tsx';
+import { useEffect } from 'react';
 
 export const AnimatedSocialPanel = () => {
 	const isXl = useIsXl();
 
+	useEffect(() => {
+		console.log(isXl);
+	}, [isXl]);
+
 	return (
 		<AnimatePresence mode="wait">
 			{isXl ? (
-				<SlideIn direction="bottom" delay={4.25} className="w-full">
+				<SlideIn key="horizontal" direction="bottom" delay={4.25} className="w-full">
 					<SocialPanel direction="horizontal" iconSize={35} />
 				</SlideIn>
 			) : (
-				<SlideIn direction="right" delay={0.4}>
+				<SlideIn key="vertical" direction="right" delay={0.4}>
 					<SocialPanel direction="vertical" iconSize={35} />
 				</SlideIn>
 			)}

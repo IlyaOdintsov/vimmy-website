@@ -32,6 +32,7 @@ const variants = {
 export const SlideIn = ({ children, direction = 'left', delay = 0, duration = 0.5, animate = true, className = '', onAnimateComplete }: SlideInProps) => {
 	return (
 		<motion.div
+			key={direction}
 			variants={variants[direction]}
 			initial="initial"
 			animate={animate ? 'animate' : 'exit'}
