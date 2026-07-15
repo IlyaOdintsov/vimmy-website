@@ -29,7 +29,7 @@ const Portfolio = () => {
 
 						<SkillsSection />
 
-						<ProjectsSection />
+						{/* <ProjectsSection /> */}
 
 						<ContactSection />
 
